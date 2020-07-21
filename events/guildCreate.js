@@ -5,7 +5,8 @@ exports.run = (bot,guild) => {
     // console.log('entrou em servidor')
     //;let channel_id;
 
-    guild.roles.create({ data: { name: 'Rapid Admin' }});
+    guild.roles.create({ data: { name: 'Rapid Admin' }, });
+    guild.roles.create({ data: { name: 'Rapid Muted' }, });
 
     const welcome_message = new Discord.MessageEmbed()
         .setColor("#ff0015")

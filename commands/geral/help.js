@@ -24,10 +24,12 @@ exports.run = (bot,message,args) => {
 	    .setThumbnail('https://cdn.discordapp.com/app-icons/734154625845952694/8261474e8963b9e62bf19159ca52dcea.png')
 	    .setAuthor('Rapid Bot', 'https://cdn.discordapp.com/app-icons/734154625845952694/8261474e8963b9e62bf19159ca52dcea.png', 'https://discord.js.org')
 	    .addFields(
-			{ name: "Bane usuários", value: "r!ban (Usuários)\nEx: r!ban @Test#0000 @A#5313" },
-			{ name: "Kicka usuários", value: "r!kick (Usuários)\nEx: r!ban @Test#0000 @A#5313" },
-			{ name: "Da o cargo 'Rapid Admin' a usuários", value: "r!setadmin (Usuários)\nEx: r!setadmin @Test#0000 @A#5313" },
-			{ name: "Limpa o chat" ,value: "r!clear (Quantidade de mensagens a ser deletadas)\nEx: r!clear 10" },
+			{ name: "Bane usuários", value: "r!ban (Usuários)\n\nEx: r!ban @Test#0000 @A#5313" },
+			{ name: "Kicka usuários", value: "r!kick (Usuários)\n\nEx: r!ban @Test#0000 @A#5313" },
+			{ name: "Da o cargo 'Rapid Admin' a usuários", value: "r!setadmin (Usuários)\n\nEx: r!setadmin @Test#0000 @A#5313" },
+			{ name: "Limpa o chat" ,value: "r!clear (Quantidade de mensagens a ser deletadas)\n\nEx: r!clear 10" },
+			{ name: "Muta um usuário", value: "r!mute (Usuário) (Tempo - Padrão 15 minutos)\n\nEx: r!mute @Test#0000 1h(1 hora)" },
+			{ name: "Desmuta um usuário", value: "r!unmute (Usuário)\n\nEx: r!unmute @Test#0000" },
         )
 	    .setTimestamp();
 	

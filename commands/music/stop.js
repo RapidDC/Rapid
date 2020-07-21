@@ -7,6 +7,7 @@ exports.run = (bot,message,args) => {
     bot.playing = false;
     bot.dispatcher.pause();
     bot.dispatcher = false;
+    message.member.voice.channel.leave();
 
     const stop_message = new Discord.MessageEmbed()
         .setTitle("Rapid Bot")

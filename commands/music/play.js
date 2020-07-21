@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 const ytdl = require('ytdl-core');
 const yt_search = require('youtube-search');
-const config = require('../config.json');
+const config = require('../../config.json');
 
 const opts = {
     maxResults: 10,
@@ -21,7 +21,7 @@ exports.run = async (bot,message,args) => {
                 .setColor("#ff0015")
                 .setAuthor('Rapid Bot', 'https://cdn.discordapp.com/app-icons/734154625845952694/8261474e8963b9e62bf19159ca52dcea.png', 'https://discord.com/oauth2/authorize?client_id=734154625845952694&permissions=8&scope=bot')
                 .setURL(link.link)
-                .setDescription(`Tocando no canal de voz: ${connection.channel.id}`)
+                .setDescription(`Tocando no canal de voz: ${connection.channel.name}`)
                 .setThumbnail(link.thumbnails.high.url)
                 .addFields(
                     { name: 'Canal', value: link.channelTitle },
@@ -40,6 +40,8 @@ exports.run = async (bot,message,args) => {
 
             if(next){
                 play(connection,next);
+            } else {
+                message.member.voice.channel.leave();
             }
         });
         

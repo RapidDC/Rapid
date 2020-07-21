@@ -30,6 +30,10 @@
         - Dar o cargo 'Rapid Admin' a usuários
     - r!clear 10
         - Limpa o chat
+    - r!mute @Test#3333 1h
+        - Muta um usuário
+    - r!unmute @Test#3333
+        - Desmuta um usuário
 - Comandos para ouvir músicas
     - r!play União Flasco
         - Adicionar uma música a fila de reprodução
