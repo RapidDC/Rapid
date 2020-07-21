@@ -41,6 +41,8 @@
         - Parar a música que está tocando e limpar a fila
     - r!volume 0.5
         - Define o volume da música
+    - r!skip
+        - Pula para a próxima música da fila
 - Comandos Gerais
     - r!help
         - Exibe os comandos

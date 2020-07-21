@@ -11,6 +11,7 @@ exports.run = (bot,message,args) => {
 		.addFields(
 			{ name: "Comandos para Administração do servidor", value: "r!help administration" },
 			{ name: "Comandos para ouvir músicas", value: "r!help music" },
+			{ name: "Comandos Gerais", value: "r!help geral"},
 			{ name: "Obter informações sobre o servidor", value: "r!serverinfo" }
 		)
 		.setTimestamp();
@@ -23,9 +24,9 @@ exports.run = (bot,message,args) => {
 	    .setThumbnail('https://cdn.discordapp.com/app-icons/734154625845952694/8261474e8963b9e62bf19159ca52dcea.png')
 	    .setAuthor('Rapid Bot', 'https://cdn.discordapp.com/app-icons/734154625845952694/8261474e8963b9e62bf19159ca52dcea.png', 'https://discord.js.org')
 	    .addFields(
-			{ name: "Banir usuários", value: "r!ban (Usuários)\nEx: r!ban @Test#0000 @A#5313" },
-			{ name: "Kickar usuários", value: "r!kick (Usuários)\nEx: r!ban @Test#0000 @A#5313" },
-			{ name: "Dar o cargo 'Rapid Admin' a usuários", value: "r!setadmin (Usuários)\nEx: r!setadmin @Test#0000 @A#5313" },
+			{ name: "Bane usuários", value: "r!ban (Usuários)\nEx: r!ban @Test#0000 @A#5313" },
+			{ name: "Kicka usuários", value: "r!kick (Usuários)\nEx: r!ban @Test#0000 @A#5313" },
+			{ name: "Da o cargo 'Rapid Admin' a usuários", value: "r!setadmin (Usuários)\nEx: r!setadmin @Test#0000 @A#5313" },
 			{ name: "Limpa o chat" ,value: "r!clear (Quantidade de mensagens a ser deletadas)\nEx: r!clear 10" },
         )
 	    .setTimestamp();
@@ -38,10 +39,27 @@ exports.run = (bot,message,args) => {
 		.setThumbnail('https://cdn.discordapp.com/app-icons/734154625845952694/8261474e8963b9e62bf19159ca52dcea.png')
 		.setAuthor('Rapid Bot', 'https://cdn.discordapp.com/app-icons/734154625845952694/8261474e8963b9e62bf19159ca52dcea.png', 'https://discord.js.org')
 		.addFields(
-			{ name: "Adicionar uma música a fila de reprodução", value: "r!play (Nome ou Link do Youtube)\nEx: r!play União Flasco" },
-			{ name: "Pausar uma música", value: "r!pause" },
-			{ name: "Despausar uma música", value: "r!resume" },
-			{ name: "Parar a música que está tocando e limpar a fila" ,value: "r!stop" },
+			{ name: "Adiciona uma música a fila de reprodução", value: "r!play (Nome ou Link do Youtube)\nEx: r!play União Flasco" },
+			{ name: "Pausa uma música", value: "r!pause" },
+			{ name: "Despausa uma música", value: "r!resume" },
+			{ name: "Para a música que está tocando e limpa a fila" ,value: "r!stop" },
+			{ name: "Define o volume da música", value: "r!volume 0.5" },
+			{ name: "Pula para a próxima música da fila", value: "r!skip" },
+		)
+		.setTimestamp();
+
+	const geral = new Discord.MessageEmbed()
+		.setColor("#ff0015")
+		.setTitle("Rapid Bot")
+		.setURL("https://discord.com/oauth2/authorize?client_id=734154625845952694&permissions=8&scope=bot")
+		.setDescription("Comandos para ouvir músicas")
+		.setThumbnail('https://cdn.discordapp.com/app-icons/734154625845952694/8261474e8963b9e62bf19159ca52dcea.png')
+		.setAuthor('Rapid Bot', 'https://cdn.discordapp.com/app-icons/734154625845952694/8261474e8963b9e62bf19159ca52dcea.png', 'https://discord.js.org')
+		.addFields(
+			{ name: "Exibe os comandos", value: "r!help" },
+			{ name: "Obtém informações sobre o servidor", value: "r!serverinfo" },
+			{ name: "Exibe a mensagem de convite do bot", value: "r!invite" },
+			{ name: "Exibe uma mensagem de regras" ,value: "r!rules" },
 		)
 		.setTimestamp();
 
