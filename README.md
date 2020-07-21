@@ -7,6 +7,7 @@
     <img src="https://img.shields.io/github/license/ReddyyZ/Rapid">
     <img src="https://img.shields.io/badge/node-14.2.0-green">
 </p>
+<a align="center" href="https://discord.com/oauth2/authorize?client_id=734154625845952694&permissions=8&scope=bot">Me adicione ao seu servidor!</a>
 
 ## :computer: Bibliotecas usadas
 - Principal
@@ -17,7 +18,7 @@
     - ytdl-core
     - @discordjs/opus
 
-## Comandos
+## :pencil: Comandos
 - Comandos para Administração do servidor
     - r!ban @Test#3333
         - Banir usuários
@@ -47,5 +48,6 @@
         - Exibe a mensagem de convite do bot
     - r!rules
         - Exibe uma mensagem de regras
-## Licença
+        
+## :page_facing_up: Licença
 Este projeto está sob a [MIT License](LICENSE).
