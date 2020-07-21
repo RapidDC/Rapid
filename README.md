@@ -7,7 +7,9 @@
     <img src="https://img.shields.io/github/license/ReddyyZ/Rapid">
     <img src="https://img.shields.io/badge/node-14.2.0-green">
 </p>
-<a align="center" href="https://discord.com/oauth2/authorize?client_id=734154625845952694&permissions=8&scope=bot">Me adicione ao seu servidor!</a>
+<p align="center">
+    <a href="https://discord.com/oauth2/authorize?client_id=734154625845952694&permissions=8&scope=bot">Me adicione ao seu servidor!</a>
+</p>
 
 ## :computer: Bibliotecas usadas
 - Principal
