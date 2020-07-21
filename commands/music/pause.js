@@ -1,9 +1,11 @@
 const Discord = require('discord.js');
 
 exports.run = (bot,message,args) => {
-    if(!bot.dispatcher) return message.channel.send("Não há nenhuma música tocando no momento!");
+    const guild = message.guild.id;
 
-    bot.dispatcher.pause();
+    if(!bot.dispatcher[`${guild}`]) return message.channel.send("Não há nenhuma música tocando no momento!");
+
+    bot.dispatcher[`${guild}`].pause();
 
     const pause_message = new Discord.MessageEmbed()
         .setTitle("Rapid Bot")

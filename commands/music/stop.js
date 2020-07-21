@@ -1,12 +1,14 @@
 const Discord = require('discord.js');
 
 exports.run = (bot,message,args) => {
-    if(!bot.dispatcher) return console.error('erro');
+    const guild = message.guild.id;
 
-    bot.queue = [];
-    bot.playing = false;
-    bot.dispatcher.pause();
-    bot.dispatcher = false;
+    if(!bot.dispatcher[`${guild}`]) return;
+
+    bot.queue[`${guild}`] = [];
+    bot.playing[`${guild}`] = false;
+    bot.dispatcher[`${guild}`].pause();
+    bot.dispatcher[`${guild}`] = false;
     message.member.voice.channel.leave();
 
     const stop_message = new Discord.MessageEmbed()

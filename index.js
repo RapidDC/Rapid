@@ -5,8 +5,9 @@ const fs = require('fs');
 const config = require('./config.json');
 
 bot.login(config.token);
-bot.queue = [];
-bot.playing = false;
+bot.queue = {};
+bot.playing = {};
+bot.dispatcher = {};
 
 bot.on('ready', () => {
     console.log(`Bot iniciado e online em ${bot.guilds.cache.size} servidores!`);

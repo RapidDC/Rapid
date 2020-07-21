@@ -1,7 +1,7 @@
 <h1 align="center">Rapid Bot</h1>
 <p align="center">Bot do Discord open-source para gerenciamento de servidores,ouvir músicas e muito mais!</p>
 <p align="center">
-    <img src="https://img.shields.io/discord/734435663713140836">
+    <a href="https://discord.gg/8fuNtVC"><img src="https://img.shields.io/discord/734435663713140836"></a>
     <img src="https://img.shields.io/github/repo-size/ReddyyZ/Rapid">
     <img src="https://img.shields.io/github/issues/ReddyyZ/Rapid">
     <img src="https://img.shields.io/github/license/ReddyyZ/Rapid">

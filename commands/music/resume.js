@@ -1,7 +1,9 @@
 const Discord = require("discord.js");
 
 exports.run = (bot,message,args) => {
-    bot.dispatcher.resume();
+    const guild = message.guild.id;
+
+    bot.dispatcher[`${guild}`].resume();
 
     const resume_message = new Discord.MessageEmbed()
         .setTitle("Rapid Bot")

@@ -9,13 +9,17 @@ const opts = {
 };
 
 exports.run = async (bot,message,args) => {
+    const guild = message.guild.id;
+
+    console.log(bot.queue);
+
     const play = async (connection,link) => {
         let dispatcher = connection.play(ytdl(link.link, { filter: 'audioonly' }));
-        bot.dispatcher = dispatcher;
+        bot.dispatcher[`${guild}`] = dispatcher;
 
         dispatcher.on('start', () => {
             console.log('audio.mp3 is now playing!');
-            bot.playing = true;
+            bot.playing[`${guild}`] = true;
             const playing_message = new Discord.MessageEmbed()
                 .setTitle(link.title)
                 .setColor("#ff0015")
@@ -24,8 +28,8 @@ exports.run = async (bot,message,args) => {
                 .setDescription(`Tocando no canal de voz: ${connection.channel.name}`)
                 .setThumbnail(link.thumbnails.high.url)
                 .addFields(
-                    { name: 'Canal', value: link.channelTitle },
-                    { name: 'Descrição', value: link.description }
+                    { name: 'Canal', value: link ? link.channelTitle : 'None' },
+                    { name: 'Descrição', value: link ? link.channelTitle : 'None' }
                 )
                 .setFooter(`Selecionado por ${message.author.username}`,message.author.avatarURL());
 
@@ -34,9 +38,9 @@ exports.run = async (bot,message,args) => {
         
         dispatcher.on('finish', () => {
             console.log('audio.mp3 has finished playing!');
-            bot.playing = false;
+            bot.playing[`${guild}`] = false;
 
-            const next = bot.queue.shift();
+            const next = bot.queue[`${guild}`].shift();
 
             if(next){
                 play(connection,next);
@@ -54,7 +58,7 @@ exports.run = async (bot,message,args) => {
 
     const voice_channel = message.member.voice.channel;
 
-    if (bot.playing) {
+    if (bot.playing[`${guild}`] === true) {
         if (!args[0].startsWith('http')){
             const {results} = await yt_search(args.join(separator=' '),opts);
             if (!results[0]) return message.channel.send("Nenhum resultado encontrado!");
@@ -67,12 +71,12 @@ exports.run = async (bot,message,args) => {
                 .setDescription(`Adicionado a fila de reprodução!`)
                 .setThumbnail(results[0].thumbnails.high.url)
                 .addFields(
-                    { name: 'Canal', value: results[0].channelTitle },
-                    { name: 'Descrição', value: results[0].description }
+                    { name: 'Canal', value: results[0] ? results[0].channelTitle : 'None' },
+                    { name: 'Descrição', value: results[0] ? results[0].description : 'None'}
                 )
                 .setFooter(`Selecionado por ${message.author.username}`,message.author.avatarURL());
 
-            bot.queue.push(results[0]);
+            bot.queue[`${guild}`].push(results[0]);
             return message.channel.send(queue_message);
 
         } else {
@@ -87,18 +91,19 @@ exports.run = async (bot,message,args) => {
                 .setDescription(`Adicionado a fila de reprodução!`)
                 .setThumbnail(results[0].thumbnails.high.url)
                 .addFields(
-                    { name: 'Canal', value: results[0].channelTitle },
-                    { name: 'Descrição', value: results[0].description }
+                    { name: 'Canal', value: results[0] ? results[0].channelTitle : 'None' },
+                    { name: 'Descrição', value: results[0] ? results[0].description : 'None' },
                 )
                 .setFooter(`Selecionado por ${message.author.username}`,message.author.avatarURL());
 
-            bot.queue.push(results[0]);
+            bot.queue[`${guild}`].push(results[0]);
             return message.channel.send(queue_message);
         }
     }
 
     const connection = await voice_channel.join();
-
+    bot.queue[`${guild}`] = [];
+    
     const {results} = await yt_search(args.join(separator=' '),opts);
     if (!results[0]) return message.channel.send("Nenhum resultado encontrado!");
 
