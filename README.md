@@ -36,10 +36,16 @@
         - Despausar uma música
     - r!stop
         - Parar a música que está tocando e limpar a fila
-- r!help
-    - Exibe os comandos
-- r!serverinfo
-    - Obter informações sobre o servidor
-
+    - r!volume 0.5
+        - Define o volume da música
+- Comandos Gerais
+    - r!help
+        - Exibe os comandos
+    - r!serverinfo
+        - Obter informações sobre o servidor
+    - r!invite
+        - Exibe a mensagem de convite do bot
+    - r!rules
+        - Exibe uma mensagem de regras
 ## Licença
 Este projeto está sob a [MIT License](LICENSE).
