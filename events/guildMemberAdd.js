@@ -6,17 +6,23 @@ exports.run = (bot,member) => {
     const guild = member.guild;
 
     const welcome_options = database[`${guild.id}`];
-    const channel = member.guild.channels.cache.find(channel => { return channel.name === "member-log" ? channel : undefined });    
+    
+    if(welcome_options){
+        const channel = guild.channels.cache.find(channel => channel.name === `${welcome_options['channel_name'].trim()}`);
+        console.log(channel);
 
-    if(channel && welcome_options){
-        const welcome_message = new Discord.MessageEmbed()
-            .setTitle(`${welcome_options['title']}`)
-            .setAuthor(`${member.displayName}`,member.user.avatarURL())
-            .setThumbnail(member.user.avatarURL())
-            .setImage(welcome_options['gif_link'])
-            .setDescription(welcome_options['text'])
-            .setTimestamp();
+        if(channel){
+            const welcome_message = new Discord.MessageEmbed()
+                .setTitle(`${welcome_options['title']}`)
+                .setAuthor(`${member.displayName}`,member.user.avatarURL())
+                .setThumbnail(member.user.avatarURL())
+                .setImage(welcome_options['gif_link'])
+                .setDescription(welcome_options['text'])
+                .setTimestamp();
 
-        channel.send(welcome_message);
+            channel.send(welcome_message);
+        } else {
+            console.log('erro porra');
+        }
     }
 }
