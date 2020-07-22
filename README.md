@@ -34,6 +34,7 @@
         - Muta um usuário
     - r!unmute @Test#3333
         - Desmuta um usuário
+        
 - Comandos para ouvir músicas
     - r!play União Flasco
         - Adicionar uma música a fila de reprodução
@@ -47,6 +48,7 @@
         - Define o volume da música
     - r!skip
         - Pula para a próxima música da fila
+
 - Comandos Gerais
     - r!help
         - Exibe os comandos
@@ -54,8 +56,18 @@
         - Obter informações sobre o servidor
     - r!invite
         - Exibe a mensagem de convite do bot
+    - r!serverinvite (Descrição)
+        - Exibe uma mensagem de convite para o servidor
     - r!rules
         - Exibe uma mensagem de regras
-        
+
+- Comandos para criar memes
+    - r!bobesponja (Texto)
+    - r!bolsonaro (Imagem)
+    - r!bolsonaro2 (Imagem)
+    - r!changemymind (Texto)
+    - r!monstro (Texto)
+    - r!piseinamerda (Texto)
+
 ## :page_facing_up: Licença
 Este projeto está sob a [MIT License](LICENSE).

@@ -12,7 +12,7 @@ exports.run = (bot,message,args) => {
 			{ name: "Comandos para Administração do servidor", value: "r!help administration" },
 			{ name: "Comandos para ouvir músicas", value: "r!help music" },
 			{ name: "Comandos Gerais", value: "r!help geral"},
-			{ name: "Obter informações sobre o servidor", value: "r!serverinfo" }
+			{ name: "Comandos para criação de memes", value: "r!help memes" },
 		)
 		.setTimestamp();
 
@@ -41,7 +41,7 @@ exports.run = (bot,message,args) => {
 		.setThumbnail('https://cdn.discordapp.com/app-icons/734154625845952694/8261474e8963b9e62bf19159ca52dcea.png')
 		.setAuthor('Rapid Bot', 'https://cdn.discordapp.com/app-icons/734154625845952694/8261474e8963b9e62bf19159ca52dcea.png', 'https://discord.js.org')
 		.addFields(
-			{ name: "Adiciona uma música a fila de reprodução", value: "r!play (Nome ou Link do Youtube)\nEx: r!play União Flasco" },
+			{ name: "Adiciona uma música a fila de reprodução", value: "r!play (Nome ou Link do Youtube)\n\nEx: r!play União Flasco" },
 			{ name: "Pausa uma música", value: "r!pause" },
 			{ name: "Despausa uma música", value: "r!resume" },
 			{ name: "Para a música que está tocando e limpa a fila" ,value: "r!stop" },
@@ -62,7 +62,25 @@ exports.run = (bot,message,args) => {
 			{ name: "Obtém informações sobre o servidor", value: "r!serverinfo" },
 			{ name: "Exibe a mensagem de convite do bot", value: "r!invite" },
 			{ name: "Exibe uma mensagem de regras" ,value: "r!rules" },
+			{ name: "Exibe uma mensagem de convite para o servidor", value: "r!serverinvite (Descrição)\n\nEx: r!serverinvite Convide seus amigos para se divertirem conosco!" },
 		)
+		.setTimestamp();
+
+	const memes = new Discord.MessageEmbed()
+		.setColor("#ff0015")
+		.setTitle("Rapid Bot")
+		.setURL("https://discord.com/oauth2/authorize?client_id=734154625845952694&permissions=8&scope=bot")
+		.setDescription(
+			"Comandos para criação de memes\n\n"+
+			"**r!bobesponja (Texto)**\n"+
+			"**r!bolsonaro (Imagem)**\n"+
+			"**r!bolsonaro2 (Imagem)**\n"+
+			"**r!changemymind (Texto)**\n"+
+			"**r!monstro (Texto)**\n"+
+			"**r!piseinamerda (Texto)**\n"
+		)
+		.setThumbnail('https://cdn.discordapp.com/app-icons/734154625845952694/8261474e8963b9e62bf19159ca52dcea.png')
+		.setAuthor('Rapid Bot', 'https://cdn.discordapp.com/app-icons/734154625845952694/8261474e8963b9e62bf19159ca52dcea.png', 'https://discord.js.org')
 		.setTimestamp();
 
 	if (!args[0]){
@@ -71,6 +89,10 @@ exports.run = (bot,message,args) => {
 		message.channel.send(administration);
 	} else if (args[0].toLowerCase() === "music"){
 		message.channel.send(music);
+	} else if (args[0].toLowerCase() === "geral"){
+		message.channel.send(geral);
+	} else if (args[0].toLowerCase() === "memes"){
+		message.channel.send(memes);
 	} else {
 		message.channel.send(principal);
 	}

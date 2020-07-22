@@ -8,9 +8,12 @@ exports.run = (bot,message,args) => {
 		message.channel.send("Você não tem permissão para executar esse comando! ``` r!setadmin (Nick) ``` para dar permissão a um usuário!");
 		return;
 	}
-	
-    message.channel.bulkDelete(args[0]).then(messages => {
-		message.channel.send(`${messages.size} mensagens deletadas!`);
-		setTimeout(() => { bot.user.lastMessage.delete() }, 4000);
-	});
+	try{
+		message.channel.bulkDelete(args[0]).then(messages => {
+			message.channel.send(`${messages.size} mensagens deletadas!`);
+			setTimeout(() => { bot.user.lastMessage.delete() }, 4000);
+		});
+	} catch (err) {
+		message.channel.send(err);
+	}
 }
