@@ -13,6 +13,7 @@ exports.run = (bot, message) => {
     }
     
 	if(message.channel.type === 'dm' || !message.content.startsWith(config.prefix) || message.author.bot ) return;
+    if(message.content === "r!join") bot.emit("guildMemberAdd",message.member);
 
     const args = message.content.slice(config.prefix.length).trim().split(/ +/);
 	const command = args.shift().toLowerCase();
