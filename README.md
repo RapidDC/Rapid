@@ -36,6 +36,10 @@
         - Desmuta um usuário
     - r!welcomemsg (Titulo) ; (Descricao) ; (Gif / Imagem link) ; (Nome do canal)
         - Define a mensagem de boas-vindas (TODOS OS ARGUMENTOS DEVEM SER SEPARADOS POR ;)
+    - r!setalert (Nome do Canal)
+        - Define o canal no qual será exibido alertas
+    - r!sendalert (Título) ; (Texto) ; (Thumbnail: opcional)
+        - Envia um alerta no canal definido em formato embed (TODOS OS ARGUMENTOS DEVEM SER SEPARADOS POR ;)
         
 - Comandos para ouvir músicas
     - r!play União Flasco

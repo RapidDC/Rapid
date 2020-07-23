@@ -9,6 +9,18 @@ exports.run = (bot,message,args) => {
     let arguments = args.join(separator = ' ');
 
     arguments = arguments.split(';');
+
+    if(arguments.length < 4){
+        const response = new Discord.MessageEmbed()
+            .setTitle('❌ERRO!❌')
+            .setAuthor('Rapid Bot', 'https://cdn.discordapp.com/app-icons/734154625845952694/8261474e8963b9e62bf19159ca52dcea.png', 'https://discord.com/oauth2/authorize?client_id=734154625845952694&permissions=8&scope=bot')
+            .setDescription(
+                "Está **faltando argumentos!** Se estiver com alguma **dúvida** digite **r!help administration** para ver a ajuda do comando."
+            )
+            .setTimestamp();
+
+        return message.channel.send(response);
+    }
     
     database[`${guild.id}`] = {};
     database[`${guild.id}`]['title'] = arguments[0];
@@ -42,10 +54,12 @@ exports.run = (bot,message,args) => {
     } else {
         const response = new Discord.MessageEmbed()
             .setTitle('❌ERRO!❌')
-            .setAuthor('Rapid Bot', 'https://cdn.discordapp.com/app-icons/734154625845952694/8261474e8963b9e62bf19159ca52dcea.png', 'https://discord.com/oauth2/authorize?client_id=734154625845952694&permissions=8&scope=bot')
+            .setAuthor(`${message.author.username}`, `${message.author.avatarURL()}`, 'https://discord.com/oauth2/authorize?client_id=734154625845952694&permissions=8&scope=bot')
             .setDescription(
-                "Houve um erro ao tentar encontrar o canal, veja se o nome está correto."
+                "Houve um **erro** ao tentar encontrar o **canal**, veja se o nome está **correto**."
             )
             .setTimestamp();
+
+        message.channel.send(response);
     }
 }

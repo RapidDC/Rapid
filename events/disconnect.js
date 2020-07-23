@@ -6,4 +6,6 @@ exports.run = (bot) => {
         bot.playing = false;
         bot.dispatcher = false;
     }
+
+    console.log('disconnect');
 };

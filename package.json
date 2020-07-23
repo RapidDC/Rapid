@@ -1,6 +1,6 @@
 {
   "name": "Rapid",
-  "version": "1.0.6.2",
+  "version": "1.0.7",
   "main": "index.js",
   "license": "MIT",
   "dependencies": {

@@ -30,6 +30,8 @@ exports.run = (bot,message,args) => {
 			{ name: "Limpa o chat" ,value: "r!clear (Quantidade de mensagens a ser deletadas)\n\nEx: r!clear 10" },
 			{ name: "Muta um usuário", value: "r!mute (Usuário) (Tempo - Padrão 15 minutos)\n\nEx: r!mute @Test#0000 1h(1 hora)" },
 			{ name: "Desmuta um usuário", value: "r!unmute (Usuário)\n\nEx: r!unmute @Test#0000" },
+			{ name: "Define o canal no qual será exibido alertas", value: "r!setalert (Nome do Canal)" },
+			{ name: "Envia um alerta no canal definido em formato embed (TODOS OS ARGUMENTOS DEVEM SER SEPARADOS POR ;)", value: "r!sendalert (Título) ; (Texto) ; (Thumbnail: opcional)" },
         )
 	    .setTimestamp();
 	
