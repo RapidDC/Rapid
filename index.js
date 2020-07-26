@@ -1,13 +1,19 @@
 const Discord = require('discord.js');
 const bot = new Discord.Client();
 const fs = require('fs');
-
 const config = require('./config.json');
+
+const mongoose = require('mongoose');
+mongoose.connect(config.DATABASE_LINK,{
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+});
 
 bot.login(config.token);
 bot.queue = {};
 bot.playing = {};
 bot.dispatcher = {};
+bot.loop = {};
 
 bot.on('ready', () => {
     console.log(`Bot iniciado e online em ${bot.guilds.cache.size} servidores!`);

@@ -11,15 +11,23 @@ const opts = {
 exports.run = async (bot,message,args) => {
     const guild = message.guild.id;
 
-    console.log(bot.queue);
-
     const play = async (connection,link) => {
-        let dispatcher = connection.play(ytdl(link.link, { filter: 'audioonly' }));
-        bot.dispatcher[`${guild}`] = dispatcher;
+        const playing = bot.playing[`${guild}`];
+
+        let dispatcher;
+
+        if(!playing){
+            dispatcher = connection.play(ytdl(link.link, { filter: 'audioonly' }));
+            bot.dispatcher[`${guild}`] = dispatcher;
+            bot.playing[`${guild}`] = link;
+        } else {
+            dispatcher = connection.play(ytdl(playing.link, { filter: 'audioonly' }));
+            bot.dispatcher[`${guild}`] = dispatcher;
+        }
 
         dispatcher.on('start', () => {
             console.log('audio.mp3 is now playing!');
-            bot.playing[`${guild}`] = true;
+
             const playing_message = new Discord.MessageEmbed()
                 .setTitle(link.title)
                 .setColor("#ff0015")
@@ -38,14 +46,18 @@ exports.run = async (bot,message,args) => {
         
         dispatcher.on('finish', () => {
             console.log('audio.mp3 has finished playing!');
-            bot.playing[`${guild}`] = false;
-
-            const next = bot.queue[`${guild}`].shift();
-
-            if(next){
-                play(connection,next);
+            
+            if (!bot.loop[`${guild}`]){
+                const next = bot.queue[`${guild}`].shift();
+                bot.playing[`${guild}`] = false;
+                
+                if(next){
+                    play(connection,next);
+                } else {
+                    message.member.voice.channel.leave();
+                }
             } else {
-                message.member.voice.channel.leave();
+                play(connection,bot.playing[`${guild}`]);
             }
         });
         
@@ -63,20 +75,26 @@ exports.run = async (bot,message,args) => {
             const {results} = await yt_search(args.join(separator=' '),opts);
             if (!results[0]) return message.channel.send("Nenhum resultado encontrado!");
 
+            let music = results[0];
+
+            if (music.link.includes('playlist')){
+                music = results[1];
+            }
+
             const queue_message = new Discord.MessageEmbed()
-                .setTitle(results[0].title)
+                .setTitle(music.title)
                 .setColor("#ff0015")
                 .setAuthor('Rapid Bot', 'https://cdn.discordapp.com/app-icons/734154625845952694/8261474e8963b9e62bf19159ca52dcea.png', 'https://discord.com/oauth2/authorize?client_id=734154625845952694&permissions=8&scope=bot')
-                .setURL(results[0].link)
+                .setURL(music.link)
                 .setDescription(`Adicionado a fila de reprodução!`)
-                .setThumbnail(results[0].thumbnails.high.url)
+                .setThumbnail(music.thumbnails.high.url)
                 .addFields(
-                    { name: 'Canal', value: results[0] ? results[0].channelTitle : 'None' },
-                    { name: 'Descrição', value: results[0] ? results[0].description : 'None'}
+                    { name: 'Canal', value: music ? music.channelTitle : 'None' },
+                    { name: 'Descrição', value: music ? music.description : 'None'}
                 )
                 .setFooter(`Selecionado por ${message.author.username}`,message.author.avatarURL());
 
-            bot.queue[`${guild}`].push(results[0]);
+            bot.queue[`${guild}`].push(music);
             return message.channel.send(queue_message);
 
         } else {
@@ -103,7 +121,7 @@ exports.run = async (bot,message,args) => {
 
     const connection = await voice_channel.join();
     bot.queue[`${guild}`] = [];
-    
+
     const {results} = await yt_search(args.join(separator=' '),opts);
     if (!results[0]) return message.channel.send("Nenhum resultado encontrado!");
 

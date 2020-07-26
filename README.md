@@ -1,5 +1,6 @@
 <h1 align="center">Rapid Bot</h1>
 <p align="center">Bot do Discord open-source para gerenciamento de servidores,ouvir músicas e muito mais!</p>
+<p align="center"><a href="https://google.com">Site para configuração do servidor</a></p>
 <p align="center">
     <a href="https://discord.gg/8fuNtVC"><img src="https://img.shields.io/discord/734435663713140836"></a>
     <img src="https://img.shields.io/github/repo-size/ReddyyZ/Rapid">
@@ -36,10 +37,6 @@
         - Desmuta um usuário
     - r!welcomemsg (Titulo) ; (Descricao) ; (Gif / Imagem link) ; (Nome do canal)
         - Define a mensagem de boas-vindas (TODOS OS ARGUMENTOS DEVEM SER SEPARADOS POR ;)
-    - r!setalert (Nome do Canal)
-        - Define o canal no qual será exibido alertas
-    - r!sendalert (Título) ; (Texto) ; (Thumbnail: opcional)
-        - Envia um alerta no canal definido em formato embed (TODOS OS ARGUMENTOS DEVEM SER SEPARADOS POR ;)
         
 - Comandos para ouvir músicas
     - r!play União Flasco

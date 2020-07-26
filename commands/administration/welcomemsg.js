@@ -1,6 +1,7 @@
 const Discord = require('discord.js');
 const fs = require('fs');
 const database_path = './database/welcome_message.json'
+const WelcomeMessage = require('../../models/WelcomeMessage');
 
 let database = JSON.parse(fs.readFileSync(database_path, 'utf8'));
 
@@ -22,12 +23,20 @@ exports.run = (bot,message,args) => {
         return message.channel.send(response);
     }
     
-    database[`${guild.id}`] = {};
-    database[`${guild.id}`]['title'] = arguments[0];
-    database[`${guild.id}`]['text'] = arguments[1];
-    database[`${guild.id}`]['gif_link'] = arguments[2];
-    database[`${guild.id}`]['channel_name'] = arguments[3];
-    fs.writeFileSync(database_path,JSON.stringify(database));
+    // database[`${guild.id}`] = {};
+    // database[`${guild.id}`]['title'] = arguments[0];
+    // database[`${guild.id}`]['text'] = arguments[1];
+    // database[`${guild.id}`]['gif_link'] = arguments[2];
+    // database[`${guild.id}`]['channel_name'] = arguments[3];
+    // fs.writeFileSync(database_path,JSON.stringify(database));
+
+    WelcomeMessage.create({
+        guild: guild.id,
+        title: arguments[0],
+        text: arguments[1],
+        gif_link: arguments[2],
+        channel_name: arguments[3], 
+    });
 
     const channel = message.guild.channels.cache.find(channel => channel.name === arguments[3].trim());
 

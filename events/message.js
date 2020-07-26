@@ -3,7 +3,7 @@ const config = require("../config.json");
 const fs = require("fs");
 const manage_roles = require('../modules/manage_roles');
 
-exports.run = (bot, message) => {
+exports.run = async (bot, message) => {
     // let database = JSON.parse(fs.readFileSync('./database/serversconfig.json', 'utf8'));
     console.log(manage_roles.hasRole(message.member,"Rapid Muted"));
     if(manage_roles.hasRole(message.member,"Rapid Muted") && message.channel.type !== 'dm'){
@@ -14,6 +14,7 @@ exports.run = (bot, message) => {
     
 	if(message.channel.type === 'dm' || !message.content.startsWith(config.prefix) || message.author.bot ) return;
     if(message.content === "r!join") bot.emit("guildMemberAdd",message.member);
+    
 
     const args = message.content.slice(config.prefix.length).trim().split(/ +/);
 	const command = args.shift().toLowerCase();
