@@ -1,9 +1,22 @@
 const Discord = require("discord.js");
 const fs = require("fs");
 const ServerConfig = require('../models/ServerConfig');
+const config = require('../config.json');
 
 exports.run = async (bot,guild) => {
-    console.log("Acabamos de entrar em um servidor!");
+    const wbhook = new Discord.WebhookClient(config.webhook.id,config.webhook.token);
+    const wbmsg = new Discord.MessageEmbed()
+        .setColor("#ff0015")
+        .setTitle('Rapid Bot')
+        .setURL('https://google.com')
+        .setDescription(
+            'Acabamos de **entrar** em mais um **novo servidor!**\n'+
+            `**Nome**: **${guild.name}**`
+        )
+        .setThumbnail(guild.iconURL())
+        .setAuthor('Rapid Bot', 'https://cdn.discordapp.com/app-icons/734154625845952694/8261474e8963b9e62bf19159ca52dcea.png', 'https://discord.js.org')
+        .setTimestamp();
+    wbhook.send(wbmsg);
 
     const filter = (reaction,user) => ['✅', '❌'].includes(reaction.emoji.name);
 

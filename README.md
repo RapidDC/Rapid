@@ -1,6 +1,6 @@
 <h1 align="center">Rapid Bot</h1>
 <p align="center">Bot do Discord open-source para gerenciamento de servidores,ouvir músicas e muito mais!</p>
-<p align="center"><a href="https://google.com">Site para configuração do servidor</a></p>
+<p align="center"><a href="http://rapid-site.surge.sh/">Site para configuração do servidor</a></p>
 <p align="center">
     <a href="https://discord.gg/8fuNtVC"><img src="https://img.shields.io/discord/734435663713140836"></a>
     <img src="https://img.shields.io/github/repo-size/ReddyyZ/Rapid">
