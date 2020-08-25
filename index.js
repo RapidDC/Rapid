@@ -15,9 +15,20 @@ bot.playing = {};
 bot.dispatcher = {};
 bot.loop = {};
 
-bot.on('ready', () => {
+const sleep = (ms) => {return new Promise(resolve => setTimeout(resolve, ms))};
+const msgs = [
+    "Bot open-source para gerenciamento de servidores,ouvir músicas,criar memes e muito mais! https://github.com/ReddyyZ/Rapid",
+    "Para obter ajuda com os comandos: r!help",
+    `<img src=x onerror="alert('YOU HAVE BEEN PWNED')">`,
+    "Site para configuração do servidor: http://rapid-site.surge.sh/",
+];
+
+bot.on('ready', async () => {
     console.log(`Bot iniciado e online em ${bot.guilds.cache.size} servidores!`);
-    bot.user.setActivity("Bot open-source para gerenciamento de servidores,ouvir músicas e muito mais! https://github.com/ReddyyZ/Rapid", { type: "PLAYING"});
+    while (1) {
+        bot.user.setActivity(msgs[Math.floor(Math.random() * msgs.length)], { type: "PLAYING"});
+        await sleep(30000);
+    }
 });
 
 fs.readdir("./events/", (err, files) => {
