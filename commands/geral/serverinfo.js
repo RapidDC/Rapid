@@ -24,12 +24,12 @@ exports.run = (bot,message,args) => {
         .setAuthor('Rapid Bot', 'https://cdn.discordapp.com/app-icons/734154625845952694/8261474e8963b9e62bf19159ca52dcea.png', 'https://discord.com/oauth2/authorize?client_id=734154625845952694&permissions=8&scope=bot')
         .addFields(
             { name: 'Nome:', value: name },
-            { name: "😎 Dono:", value: `<@${ownerID}>` },
-            { name: "👨‍👦‍👦 Quantia de membros:", value: membersCount },
-            { name: "❓ Descrição:", value: `${description ? description : 'Nenhuma'}` },
-            { name: '🌎 Região:', value: region },
-            { name: "🕵️ ID do Servidor (Para desenvolvedores):", value: id },
-            { name: "⏰ Criado em:", value: createdAt },
+            { name: "\\😎 Dono:", value: `<@${ownerID}>` },
+            { name: "\\👨‍👦‍👦 Quantia de membros:", value: membersCount },
+            { name: "\\❓ Descrição:", value: `${description ? description : 'Nenhuma'}` },
+            { name: '\\🌎 Região:', value: region },
+            { name: "\\🕵️ ID do Servidor (Para desenvolvedores):", value: id },
+            { name: "\\⏰ Criado em:", value: createdAt },
         )
         .setTimestamp();
 

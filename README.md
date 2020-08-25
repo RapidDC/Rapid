@@ -72,5 +72,11 @@
     - r!monstro (Texto)
     - r!piseinamerda (Texto)
 
+- Comandos Backup
+    - r!backup
+        - Cria um backup de todos os canais, cargos, mensagens, etc. (Necessita de permissão de administrador)
+    - r!load (Backup ID)
+        - Carrega um backup existente (Necessita de permissão de administrador)
+
 ## :page_facing_up: Licença
 Este projeto está sob a [MIT License](LICENSE).

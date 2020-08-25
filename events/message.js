@@ -2,18 +2,42 @@ const Discord = require("discord.js");
 const config = require("../config.json");
 const fs = require("fs");
 const manage_roles = require('../modules/manage_roles');
+const AntiSpam = require('discord-anti-spam');
+const ServerConfig = require('../models/ServerConfig');
+
+const antiSpam = new AntiSpam({
+	warnThreshold: 3, // Amount of messages sent in a row that will cause a warning.
+	kickThreshold: 7, // Amount of messages sent in a row that will cause a kick.
+	banThreshold: 15, // Amount of messages sent in a row that will cause a ban.
+	muteThreshold: 5, // Amount of messages sent in a row that will cause a mute.
+	maxInterval: 2000, // Amount of time (in milliseconds) in which messages are considered spam.
+	warnMessage: '{@user}, pare de spammar.', // Message that will be sent in chat upon warning a user.
+	kickMessage: '**{user_tag}** foi kickado por spam.', // Message that will be sent in chat upon kicking a user.
+	banMessage: '**{user_tag}** foi banido por spam.', // Message that will be sent in chat upon banning a user.
+	muteMessage: '**{user_tag}** foi mutado por spam.', // Message that will be sent in chat upon muting a user.
+	maxDuplicatesWarning: 7, // Amount of duplicate messages that trigger a warning.
+	maxDuplicatesKick: 15, // Amount of duplicate messages that trigger a warning.
+	maxDuplicatesBan: 22, // Amount of duplicate messages that trigger a warning.
+	maxDuplicatesMute: 9, // Amount of duplicate messages that trigger a warning.
+	// Discord permission flags: https://discord.js.org/#/docs/main/master/class/Permissions?scrollTo=s-FLAGS
+	exemptPermissions: [ 'ADMINISTRATOR'], // Bypass users with any of these permissions(These are not roles so use the flags from link above).
+	ignoreBots: true, // Ignore bot messages.
+	verbose: true, // Extended Logs from module.
+	ignoredUsers: [], // Array of User IDs that get ignored.
+	// And many more options... See the documentation.
+});
 
 exports.run = async (bot, message) => {
-    // let database = JSON.parse(fs.readFileSync('./database/serversconfig.json', 'utf8'));
-    console.log(manage_roles.hasRole(message.member,"Rapid Muted"));
     if(manage_roles.hasRole(message.member,"Rapid Muted") && message.channel.type !== 'dm'){
-        message.delete();
-        // message.author.send(`Você não pode mandar mensagens no servidor ${message.guild.name}, pois você está mutado!`);
-        return;
+        return message.delete();
     }
+    
+    const server = await ServerConfig.findOne({guild: message.guild.id});
+    if (server) if(server.antispam === true) antiSpam.message(message);
     
 	if(message.channel.type === 'dm' || !message.content.startsWith(config.prefix) || message.author.bot ) return;
     if(message.content === "r!join") bot.emit("guildMemberAdd",message.member);
+    if(message.content === "r!wmsg") bot.emit("guildCreate",message.guild);
     
 
     const args = message.content.slice(config.prefix.length).trim().split(/ +/);

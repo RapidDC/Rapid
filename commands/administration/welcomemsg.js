@@ -1,9 +1,9 @@
 const Discord = require('discord.js');
 const fs = require('fs');
-const database_path = './database/welcome_message.json'
+// const database_path = './database/welcome_message.json'
 const WelcomeMessage = require('../../models/WelcomeMessage');
 
-let database = JSON.parse(fs.readFileSync(database_path, 'utf8'));
+// let database = JSON.parse(fs.readFileSync(database_path, 'utf8'));
 
 exports.run = (bot,message,args) => {
     const guild = message.guild;

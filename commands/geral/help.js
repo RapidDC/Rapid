@@ -13,6 +13,7 @@ exports.run = (bot,message,args) => {
 			{ name: "Comandos para ouvir músicas", value: "r!help music" },
 			{ name: "Comandos Gerais", value: "r!help geral"},
 			{ name: "Comandos para criação de memes", value: "r!help memes" },
+			{ name: "Comandos Backup", value: "r!help backup" },
 		)
 		.setTimestamp();
 
@@ -32,6 +33,8 @@ exports.run = (bot,message,args) => {
 			{ name: "Desmuta um usuário", value: "r!unmute (Usuário)\n\nEx: r!unmute @Test#0000" },
 			{ name: "Define o canal no qual será exibido alertas", value: "r!setalert (Nome do Canal)" },
 			{ name: "Envia um alerta no canal definido em formato embed (TODOS OS ARGUMENTOS DEVEM SER SEPARADOS POR ;)", value: "r!sendalert (Título) ; (Texto) ; (Thumbnail: opcional)" },
+			{ name: "Cria backup do servidor (Cargos, canais, mensagems, etc)", value: "r!backup" },
+			{ name: "Carrega um backup", value: "r!load (BACKUP ID)" },
         )
 	    .setTimestamp();
 	
@@ -85,6 +88,19 @@ exports.run = (bot,message,args) => {
 		.setAuthor('Rapid Bot', 'https://cdn.discordapp.com/app-icons/734154625845952694/8261474e8963b9e62bf19159ca52dcea.png', 'https://discord.js.org')
 		.setTimestamp();
 
+	const backp = new Discord.MessageEmbed()
+		.setColor("#ff0015")
+		.setTitle("Rapid Bot")
+		.setURL("https://discord.com/oauth2/authorize?client_id=734154625845952694&permissions=8&scope=bot")
+		.setDescription(
+			"Comandos para criação de memes\n\n"+
+			"**r!backup**\n"+
+			"**r!load (Backup ID)**\n"
+		)
+		.setThumbnail('https://cdn.discordapp.com/app-icons/734154625845952694/8261474e8963b9e62bf19159ca52dcea.png')
+		.setAuthor('Rapid Bot', 'https://cdn.discordapp.com/app-icons/734154625845952694/8261474e8963b9e62bf19159ca52dcea.png', 'https://discord.js.org')
+		.setTimestamp();
+
 	if (!args[0]){
 		message.channel.send(principal);
 	} else if (args[0].toLowerCase() === "administration"){
@@ -95,6 +111,8 @@ exports.run = (bot,message,args) => {
 		message.channel.send(geral);
 	} else if (args[0].toLowerCase() === "memes"){
 		message.channel.send(memes);
+	} else if (args[0].toLowerCase() === "backup") {
+		message.channel.send(backp);
 	} else {
 		message.channel.send(principal);
 	}
