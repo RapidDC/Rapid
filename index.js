@@ -7,6 +7,7 @@ const mongoose = require('mongoose');
 mongoose.connect(config.DATABASE_LINK,{
     useNewUrlParser: true,
     useUnifiedTopology: true,
+    useFindAndModify: false,
 });
 
 bot.login(config.token);

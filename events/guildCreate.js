@@ -51,22 +51,28 @@ exports.run = async (bot,guild) => {
         await msg.react('✅');
         await msg.react('❌');
 
-        msg.awaitReactions(filter,{ max: 1, time: 120000, errors: ['time'] }).then(collected => {
+        msg.awaitReactions(filter,{ max: 1, time: 120000, errors: ['time'] }).then(async (collected) => {
             const reaction = collected.first();
 
-            if (reaction.name === '✅'){
-                ServerConfig.create({
-                    guild: guild.id,
-                    antispam: true,
-                    joinedAt: new Date().getTime(),
-                });
+            if (reaction._emoji.name === '✅'){
+                const s = await ServerConfig.findOne({guild: guild.id,});
+
+                if (!s) {
+                    await ServerConfig.findOneAndUpdate({guild: guild.id,},{
+                        antispam: true,
+                        joinedAt: new Date().getTime(),
+                    });
+                }
                 msg.channel.send("Anti-Flood habilitado!");
             } else {
-                ServerConfig.create({
-                    guild: guild.id,
-                    antispam: false,
-                    joinedAt: new Date().getTime(),
-                });
+                const s = await ServerConfig.findOne({guild: guild.id,});
+
+                if (!s) {
+                    await ServerConfig.findOneAndUpdate({guild: guild.id,},{
+                        antispam: false,
+                        joinedAt: new Date().getTime(),
+                    });
+                }
 
                 msg.channel.send("Anti-Flood desabilitado!");
             }
@@ -85,23 +91,41 @@ exports.run = async (bot,guild) => {
                 await msg.react('❌');
                 
                 await new Promise(r => setTimeout(r, 1000));
-                msg.awaitReactions(filter,{ max: 1, time: 60000, errors: ['time'] }).then(collected => {
+                msg.awaitReactions(filter,{ max: 1, time: 60000, errors: ['time'] }).then(async (collected) => {
                     const reaction = collected.first();
 
                     if (reaction._emoji.name === '✅'){
-                        ServerConfig.create({
-                            guild: guild.id,
-                            antispam: true,
-                            joinedAt: new Date().getTime(),
-                        });
+                        const s = await ServerConfig.findOne({guild: guild.id,});
+
+                        if (!s){
+                            await ServerConfig.create({
+                                guild: guild.id,
+                                antispam: true,
+                                joinedAt: new Date().getTime(),
+                            });
+                        } else {
+                            await ServerConfig.findOneAndUpdate({guild: guild.id,},{
+                                antispam: true,
+                                joinedAt: new Date().getTime(),
+                            });
+                        }
 
                         msg.channel.send("Anti-Flood habilitado!");
                     } else {
-                        ServerConfig.create({
-                            guild: guild.id,
-                            antispam: false,
-                            joinedAt: new Date().getTime(),
-                        });
+                        const s = await ServerConfig.findOne({guild: guild.id,});
+
+                        if (!s){
+                            await ServerConfig.create({
+                                guild: guild.id,
+                                antispam: false,
+                                joinedAt: new Date().getTime(),
+                            });
+                        } else {
+                            await ServerConfig.findOneAndUpdate({guild: guild.id,},{
+                                antispam: false,
+                                joinedAt: new Date().getTime(),
+                            });
+                        }
 
                         msg.reply("Anti-Flood desabilitado!");
                     }

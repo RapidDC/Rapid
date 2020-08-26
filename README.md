@@ -37,6 +37,8 @@
         - Desmuta um usuário
     - r!welcomemsg (Titulo) ; (Descricao) ; (Gif / Imagem link) ; (Nome do canal)
         - Define a mensagem de boas-vindas (TODOS OS ARGUMENTOS DEVEM SER SEPARADOS POR ;)
+    - r!antiflood
+        - Ativa ou desativa o sistema anti-flood
         
 - Comandos para ouvir músicas
     - r!play União Flasco

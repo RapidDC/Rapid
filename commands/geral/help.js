@@ -35,6 +35,7 @@ exports.run = (bot,message,args) => {
 			{ name: "Envia um alerta no canal definido em formato embed (TODOS OS ARGUMENTOS DEVEM SER SEPARADOS POR ;)", value: "r!sendalert (Título) ; (Texto) ; (Thumbnail: opcional)" },
 			{ name: "Cria backup do servidor (Cargos, canais, mensagems, etc)", value: "r!backup" },
 			{ name: "Carrega um backup", value: "r!load (BACKUP ID)" },
+			{ name: "Ativa ou desativa o sistema anti-flood", value: "r!antiflood" },
         )
 	    .setTimestamp();
 	
