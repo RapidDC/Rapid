@@ -8,7 +8,7 @@ exports.run = async (bot,guild) => {
     const wbmsg = new Discord.MessageEmbed()
         .setColor("#ff0015")
         .setTitle('Rapid Bot')
-        .setURL('https://google.com')
+        .setURL('http://rapid-site.surge.sh')
         .setDescription(
             'Acabamos de **entrar** em mais um **novo servidor!**\n'+
             `**Nome**: **${guild.name}**`
@@ -26,20 +26,21 @@ exports.run = async (bot,guild) => {
     const welcome_message = new Discord.MessageEmbed()
         .setColor("#ff0015")
         .setTitle('Rapid Bot')
-        .setURL('https://google.com')
+        .setURL('http://rapid-site.surge.sh')
         .setDescription('Obrigado por me adicionar ao seu servidor!')
         .setThumbnail('https://cdn.discordapp.com/app-icons/734154625845952694/8261474e8963b9e62bf19159ca52dcea.png')
         .setAuthor('Rapid Bot', 'https://cdn.discordapp.com/app-icons/734154625845952694/8261474e8963b9e62bf19159ca52dcea.png', 'https://discord.js.org')
         .addFields(
             { name: 'Me adicione ao seu servidor!',value: '[Clique aqui! 🔗](https://discord.com/oauth2/authorize?client_id=734154625845952694&permissions=8&scope=bot)' },
-            { name: 'Meu prefixo é r!',value: 'Para ver os comandos digite r!help' }
+            { name: 'Meu prefixo é r!',value: 'Para ver os comandos digite r!help' },
+            { name: "Para configurar uma mensagem de boas-vindas à novos membros, configure no site", value: "http://rapid-site.surge.sh" },
         )
         .setTimestamp();
 
     const antiflood_msg = new Discord.MessageEmbed()
         .setColor("#ff0015")
         .setTitle('Rapid Bot')
-        .setURL('https://google.com')
+        .setURL('http://rapid-site.surge.sh')
         .setDescription('Deseja habilitar o sistema Anti-Flood?')
         .setThumbnail('https://cdn.discordapp.com/app-icons/734154625845952694/8261474e8963b9e62bf19159ca52dcea.png')
         .setAuthor('Rapid Bot', 'https://cdn.discordapp.com/app-icons/734154625845952694/8261474e8963b9e62bf19159ca52dcea.png', 'https://discord.js.org')
