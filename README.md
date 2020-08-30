@@ -46,6 +46,10 @@
         - Define a mensagem de boas-vindas (TODOS OS ARGUMENTOS DEVEM SER SEPARADOS POR ;)
     - r!antiflood
         - Ativa ou desativa o sistema anti-flood
+    - r!stopchat (Chat)
+        - Para o chat desabilitando a permissão dos usuários de falar
+    - r!resumechat (Chat)
+        - Habilita novamente a permissão dos usuários de falar
         
 - Comandos para ouvir músicas
     - r!play União Flasco
