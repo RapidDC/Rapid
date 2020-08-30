@@ -15,11 +15,18 @@
 ## :computer: Bibliotecas usadas
 - Principal
     - discord.js
+    - mongoose
 - Música
     - ffmpeg
     - ffmpeg-static
     - ytdl-core
     - @discordjs/opus
+- Memes
+    - canvas
+- Backup
+    - discord-backup
+- Anti Spam
+    - discord-anti-spam
 
 ## :pencil: Comandos
 - Comandos para Administração do servidor

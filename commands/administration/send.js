@@ -4,7 +4,7 @@ const config = require('../../config.json');
 exports.run = (bot,message,args) => {
     if (message.author.id !== 329314898758729729) return;
 
-    const title,description,thumbnail = String(message.content).split(";");
+    const [title,description,thumbnail] = String(message.content).split(";");
     const wbhook = new Discord.WebhookClient(config.webhook.id,config.webhook.token);
 
     const msg = new Discord.MessageEmbed()

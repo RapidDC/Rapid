@@ -16,8 +16,8 @@ exports.run = async (bot,member) => {
         if(channel){
             const welcome_message = new Discord.MessageEmbed()
                 .setTitle(`${welcome_options['title']}`)
-                .setAuthor(`${member.displayName}`,member.user.avatarURL())
-                .setThumbnail(member.user.avatarURL())
+                .setAuthor(`${member.displayName}`,member.user.displayAvatarURL())
+                .setThumbnail(member.user.displayAvatarURL())
                 .setImage(welcome_options['gif_link'])
                 .setDescription(welcome_options['text'])
                 .setTimestamp();

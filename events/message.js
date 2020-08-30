@@ -51,13 +51,13 @@ exports.run = async (bot, message) => {
                     files2.forEach(file2 => {
                         let commandd = require(`../commands/${file}/${file2}`);
                         let commandName = file2.split(".")[0];
-                        if (commandName == command) { commandd. run(bot,message,args); }
+                        try{ if (commandName == command) { commandd. run(bot,message,args); } } catch (err) {console.error(err)}
                     });
                 });
             } else {
                 let commandd = require(`../commands/${file}`);
                 let commandName = file.split(".")[0];
-                if (commandName == command) { commandd.run(bot,message,args); }
+                try{ if (commandName == command) { commandd.run(bot,message,args); } } catch(err) { console.error(err) }
             }
         });
     });
