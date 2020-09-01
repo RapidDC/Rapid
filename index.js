@@ -37,6 +37,6 @@ fs.readdir("./events/", (err, files) => {
     files.forEach(file => {
         let eventFunction = require(`./events/${file}`);
         let eventName = file.split(".")[0];
-        bot.on(eventName, (...args) => eventFunction.run(bot, ...args));
+        try{ bot.on(eventName, (...args) => eventFunction.run(bot, ...args)); } catch (err) { console.error(err) }
     });
 });
