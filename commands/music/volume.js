@@ -10,12 +10,12 @@ exports.run = (bot,message,args) => {
         const x = Number(args[0]);
         console.log(x);
         console.log(typeof(x));
+        if (isNaN(x)) return message.channel.send("Valor inserido é inválido!");
+
         if (x > 2){
             return message.channel.send("Volume máximo 2!");
         } else if (x < 0){
             return message.channel.send("Volume mínimo 0!");
-        } else if (x == NaN){
-            return message.channel.send("Valor inserido é inválido!");
         } else {
             bot.dispatcher[`${guild}`].setVolume(x);
             return message.channel.send(`Volume alterado para ${args[0]}!`);
