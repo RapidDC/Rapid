@@ -45,8 +45,6 @@ exports.run = async (bot,message,args) => {
         });
         
         dispatcher.on('finish', () => {
-            console.log('audio.mp3 has finished playing!');
-            
             if (!bot.loop[`${guild}`]){
                 const next = bot.queue[`${guild}`].shift();
                 bot.playing[`${guild}`] = false;
