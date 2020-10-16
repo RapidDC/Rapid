@@ -6,6 +6,11 @@ const WelcomeMessage = require('../../models/WelcomeMessage');
 // let database = JSON.parse(fs.readFileSync(database_path, 'utf8'));
 
 exports.run = (bot,message,args) => {
+    if (!message.member.roles.cache.has('Rapid Admin') && !message.member.hasPermission("KICK_MEMBERS")) {
+		message.channel.send("Você não tem permissão para executar esse comando! ``` r!setadmin (Nick) ``` para dar permissão a um usuário!");
+		return;
+    }
+    
     const guild = message.guild;
     let arguments = args.join(separator = ' ');
 
