@@ -116,7 +116,6 @@ exports.run = async (bot,message,args) => {
                     .setTitle("Error")
                     .setColor("#ff0015")
                     .setAuthor('Rapid Bot', 'https://cdn.discordapp.com/app-icons/734154625845952694/8261474e8963b9e62bf19159ca52dcea.png', 'https://discord.com/oauth2/authorize?client_id=734154625845952694&permissions=8&scope=bot')
-                    .setURL(music.link)
                     .setDescription(`Erro ao buscar a música!\nPor favor tente colocar o link da música`)
                     .setFooter(`Selecionado por ${message.author.username}`,message.author.avatarURL());
                 return message.channel.send(error_message);
@@ -147,5 +146,18 @@ exports.run = async (bot,message,args) => {
     const {results} = await yt_search(args.join(separator=' '),opts);
     if (!results[0]) return message.channel.send("Nenhum resultado encontrado!");
 
-    play(connection,results[0]);
+    try{
+        play(connection,results[0]);
+    } catch (err) {
+        const error_message = new Discord.MessageEmbed()
+        .setTitle("Error")
+        .setColor("#ff0015")
+        .setAuthor('Rapid Bot', 'https://cdn.discordapp.com/app-icons/734154625845952694/8261474e8963b9e62bf19159ca52dcea.png', 'https://discord.com/oauth2/authorize?client_id=734154625845952694&permissions=8&scope=bot')
+        .setURL(results[0].link)
+        .setThumbnail(results[0].thumbnails.high.url)
+        .setDescription(`Erro ao tocar a música!`)
+        .setFooter(`Selecionado por ${message.author.username}`,message.author.avatarURL());
+        
+        return message.channel.send(error_message);
+    }
 };
