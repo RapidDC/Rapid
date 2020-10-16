@@ -70,7 +70,19 @@ exports.run = async (bot,message,args) => {
 
     if (bot.playing[`${guild}`]) {
         if (!args[0].startsWith('http')){
-            const {results} = await yt_search(args.join(separator=' '),opts);
+            let results;
+            try{
+                results = (await yt_search(args.join(separator=' '),opts)).results;
+            } catch (err) {
+                const error_message = new Discord.MessageEmbed()
+                    .setTitle("Error")
+                    .setColor("#ff0015")
+                    .setAuthor('Rapid Bot', 'https://cdn.discordapp.com/app-icons/734154625845952694/8261474e8963b9e62bf19159ca52dcea.png', 'https://discord.com/oauth2/authorize?client_id=734154625845952694&permissions=8&scope=bot')
+                    .setURL(music.link)
+                    .setDescription(`Erro ao buscar a música!\nPor favor tente colocar o link da música`)
+                    .setFooter(`Selecionado por ${message.author.username}`,message.author.avatarURL());
+                return message.channel.send(error_message);
+            }
             if (!results[0]) return message.channel.send("Nenhum resultado encontrado!");
 
             let music = results[0];
@@ -96,7 +108,19 @@ exports.run = async (bot,message,args) => {
             return message.channel.send(queue_message);
 
         } else {
-            const {results} = await yt_search(args[0],opts);
+            let results;
+            try{
+                results = (await yt_search(args[0],opts)).results;
+            } catch (err) {
+                const error_message = new Discord.MessageEmbed()
+                    .setTitle("Error")
+                    .setColor("#ff0015")
+                    .setAuthor('Rapid Bot', 'https://cdn.discordapp.com/app-icons/734154625845952694/8261474e8963b9e62bf19159ca52dcea.png', 'https://discord.com/oauth2/authorize?client_id=734154625845952694&permissions=8&scope=bot')
+                    .setURL(music.link)
+                    .setDescription(`Erro ao buscar a música!\nPor favor tente colocar o link da música`)
+                    .setFooter(`Selecionado por ${message.author.username}`,message.author.avatarURL());
+                return message.channel.send(error_message);
+            }
             if (!results[0]) return message.channel.send("Nenhum resultado encontrado!");
 
             const queue_message = new Discord.MessageEmbed()
