@@ -6,3 +6,6 @@ ping.js
 rapid.zip
 test.js
 .env
+DiscordBot.zip
+commands/administration/setalert.js
+commands/administration/sendalert.js
