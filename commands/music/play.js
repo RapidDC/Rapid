@@ -70,7 +70,7 @@ exports.run = async (bot,message,args) => {
 
     const voice_channel = message.member.voice.channel;
 
-    if (bot.playing[`${guild}`] === true) {
+    if (bot.playing[`${guild}`]) {
         if (!args[0].startsWith('http')){
             const {results} = await yt_search(args.join(separator=' '),opts);
             if (!results[0]) return message.channel.send("Nenhum resultado encontrado!");
