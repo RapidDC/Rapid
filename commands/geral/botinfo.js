@@ -1,6 +1,5 @@
 const Discord = require('discord.js');
 const ServerConfig = require('../../models/ServerConfig');
-const ms = require('ms');
 
 exports.run = async (bot,message,args) => {
     const server = await ServerConfig.findOne({ guild: message.guild.id });
