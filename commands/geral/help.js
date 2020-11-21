@@ -32,10 +32,12 @@ exports.run = (bot,message,args) => {
 			{ name: "Muta um usuário", value: "r!mute (Usuário) (Tempo - Padrão 15 minutos)\n\nEx: r!mute @Test#0000 1h(1 hora)" },
 			{ name: "Desmuta um usuário", value: "r!unmute (Usuário)\n\nEx: r!unmute @Test#0000" },
 			{ name: "Define o canal no qual será exibido alertas", value: "r!setalert (Nome do Canal)" },
-			{ name: "Envia um alerta no canal definido em formato embed (TODOS OS ARGUMENTOS DEVEM SER SEPARADOS POR ;)", value: "r!sendalert (Título) ; (Texto) ; (Thumbnail: opcional)" },
+			{ name: "Envia uma mensagem em formato embed (TODOS OS ARGUMENTOS DEVEM SER SEPARADOS POR ;)", value: "r!sendembed (Título) ; (Texto) ; (Thumbnail: opcional)" },
 			{ name: "Cria backup do servidor (Cargos, canais, mensagems, etc)", value: "r!backup" },
 			{ name: "Carrega um backup", value: "r!load (BACKUP ID)" },
 			{ name: "Ativa ou desativa o sistema anti-flood", value: "r!antiflood" },
+			{ name: "Desativa o chat", value: "r!stopchat <Canal (Opcional)>" },
+			{ name: "Ativa novamente o chat", value: "r!resumechat <Canal (Opcional)>" },
         )
 	    .setTimestamp();
 	
@@ -53,6 +55,7 @@ exports.run = (bot,message,args) => {
 			{ name: "Para a música que está tocando e limpa a fila" ,value: "r!stop" },
 			{ name: "Define o volume da música", value: "r!volume 0.5" },
 			{ name: "Pula para a próxima música da fila", value: "r!skip" },
+			{ name: "Coloca a música em loop", value: "r!loop" },
 		)
 		.setTimestamp();
 
@@ -65,7 +68,9 @@ exports.run = (bot,message,args) => {
 		.setAuthor('Rapid Bot', 'https://cdn.discordapp.com/app-icons/734154625845952694/8261474e8963b9e62bf19159ca52dcea.png', 'https://discord.js.org')
 		.addFields(
 			{ name: "Exibe os comandos", value: "r!help" },
-			{ name: "Obtém informações sobre o servidor", value: "r!serverinfo" },
+			{ name: "Exibe informações sobre o bot", value: "r!botinfo" },
+			{ name: "Exibe informações sobre o servidor", value: "r!serverinfo" },
+			{ name: "Baixar a foto de perfil de um usuário", value: "r!profile (Usuário)" },
 			{ name: "Exibe a mensagem de convite do bot", value: "r!invite" },
 			{ name: "Exibe uma mensagem de regras" ,value: "r!rules" },
 			{ name: "Exibe uma mensagem de convite para o servidor", value: "r!serverinvite (Descrição)\n\nEx: r!serverinvite Convide seus amigos para se divertirem conosco!" },
