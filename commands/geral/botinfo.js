@@ -8,14 +8,11 @@ exports.run = async (bot,message,args) => {
     const guilds = bot.guilds.cache.size;
     const channels = bot.channels.cache.size;
     
-    const joinedAt = server.joinedAt;
-    let time = (new Date().getTime() - joinedAt);
-
-
-    const seconds = Math.round(ms(time));
-    const minutes = Math.round(time / 60000);
-    const hours = Math.round(time / 120000);
-    const days = Math.round(time / 60 / 60);
+    const joinedAt = new Date(server.joinedAt);
+    const data = new Date();
+    
+    const ms_ = Math.abs(data - joinedAt);
+    const days = Math.ceil(ms_ / (1000 * 60 * 60 * 24));
 
     const msg = new Discord.MessageEmbed()
         .setTitle("Rapid Bot")
@@ -26,7 +23,7 @@ exports.run = async (bot,message,args) => {
             "Informações sobre o **bot**\n"+
             "\n"+
             `Está em **${guilds} grupos** e **${channels} canais**\n`+
-            `Está nesse servidor desde ${days+' dias '+hours+' horas '+minutes+' minutos '+seconds+' segundos'}`
+            `Está nesse servidor há ${days+' dias '}`
         )
         .setTimestamp();
 
