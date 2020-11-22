@@ -2,7 +2,7 @@
 <p align="center">Bot do Discord open-source para gerenciamento de servidores,ouvir músicas e muito mais!</p>
 <p align="center"><a href="http://rapid-site.surge.sh/">Site para configuração do servidor</a></p>
 <p align="center">
-    <a href="https://discord.gg/8fuNtVC"><img src="https://img.shields.io/discord/734435663713140836"></a>
+    <a href="https://discord.gg/v5d3PZ9"><img src="https://img.shields.io/discord/704882848364101763"></a>
     <img src="https://img.shields.io/github/repo-size/ReddyyZ/Rapid">
     <img src="https://img.shields.io/github/issues/ReddyyZ/Rapid">
     <img src="https://img.shields.io/github/license/ReddyyZ/Rapid">
