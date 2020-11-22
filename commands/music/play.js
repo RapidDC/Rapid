@@ -110,7 +110,7 @@ exports.run = async (bot,message,args) => {
         
         dispatcher.on('finish', () => {
             if (!bot.loop[`${guild}`]){
-                const next = bot.queue[`${guild}`].shift();
+                const next = bot.queue[`${guild}`] ? bot.queue[`${guild}`].shift() : null;
                 bot.playing[`${guild}`] = false;
                 
                 if(next){
