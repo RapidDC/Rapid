@@ -3,6 +3,7 @@ const Discord = require("discord.js");
 exports.run = (bot,message,args) => {
     const guild = message.guild.id;
 
+    if(!bot.dispatcher[`${guild}`]) return message.channel.send("Não há nenhuma música tocando no momento!");
     bot.dispatcher[`${guild}`].resume();
 
     const resume_message = new Discord.MessageEmbed()
