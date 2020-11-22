@@ -3,7 +3,7 @@ const Discord = require('discord.js');
 exports.run = (bot,message,args) => {
     const guild = message.guild.id;
 
-    if(!bot.dispatcher[`${guild}`]) return;
+    if(!bot.dispatcher[`${guild}`]) return message.channel.send("\\❌ Nenhuma música tocando!");
 
     bot.queue[`${guild}`] = [];
     bot.playing[`${guild}`] = false;

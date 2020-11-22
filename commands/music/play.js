@@ -10,6 +10,59 @@ const opts = {
 
 exports.run = async (bot,message,args) => {
     const guild = message.guild.id;
+    const voice_channel = message.member.voice.channel;
+    if(!args[0] && !args.link) return message.channel.send("\\❌ Digite o link/nome da música. Ex: r!play Bonde da Stronda");
+    if(!message.member.voice.channel) return message.channel.send("\\❌ Você deve estar em um canal de voz!");
+    const connection = await voice_channel.join();
+
+    const get_results = async (search) => {
+        search = search.join(separator=' ');
+
+        const x = ["0️⃣","1️⃣","2️⃣","3️⃣","4️⃣","5️⃣","6️⃣","7️⃣","8️⃣","9️⃣"]
+        const {results} = await yt_search(search,opts);
+
+        let rs = {};
+        results.map((value, i) => {
+            if (value.kind !== "youtube#channel"){
+                rs[x[i]] = value;
+            }
+        });
+
+        const msg = new Discord.MessageEmbed()
+            .setTitle("Search: " + search)
+            .setColor("#ff0015")
+            .setAuthor('Rapid Bot', 'https://cdn.discordapp.com/app-icons/734154625845952694/8261474e8963b9e62bf19159ca52dcea.png', 'https://discord.com/oauth2/authorize?client_id=734154625845952694&permissions=8&scope=bot')
+            .setDescription(
+                results.map((value, i) => {
+                    return (
+                        `**${i}.** ${value.title}`
+                    )
+                })
+            )
+            .setFooter(`${message.author.username}`,message.author.avatarURL());
+
+        const _ = await message.channel.send(msg);
+        await _.react("0️⃣");
+        await _.react("1️⃣");
+        await _.react("2️⃣");
+        await _.react("3️⃣");
+        await _.react("4️⃣");
+        await _.react("5️⃣");
+        await _.react("6️⃣");
+        await _.react("7️⃣");
+        await _.react("8️⃣");
+        await _.react("9️⃣");
+
+        const filter = (reaction, user) => user.id === message.author.id;
+        const collector = _.createReactionCollector(filter, { time: 15000 });
+        
+        collector.on('collect', r => {
+            const video = rs[r._emoji.name];
+            if (video) play(connection,video);
+        });
+        setTimeout(() => {_.delete()},15000);
+
+    }
 
     const play = async (connection,link) => {
         const playing = bot.playing[`${guild}`];
@@ -21,13 +74,24 @@ exports.run = async (bot,message,args) => {
             bot.dispatcher[`${guild}`] = dispatcher;
             bot.playing[`${guild}`] = link;
         } else {
-            dispatcher = connection.play(ytdl(playing.link, { filter: 'audioonly' }));
-            bot.dispatcher[`${guild}`] = dispatcher;
+            bot.queue[`${guild}`] ? bot.queue[`${guild}`].push(link) : bot.queue[`${guild}`] = [link];
+            
+            const queue_message = new Discord.MessageEmbed()
+                .setTitle(link.title)
+                .setColor("#ff0015")
+                .setAuthor('Rapid Bot', 'https://cdn.discordapp.com/app-icons/734154625845952694/8261474e8963b9e62bf19159ca52dcea.png', 'https://discord.com/oauth2/authorize?client_id=734154625845952694&permissions=8&scope=bot')
+                .setURL(link.link)
+                .setDescription(`Adicionado a fila de reprodução!`)
+                .setThumbnail(link.thumbnails.high.url)
+                .addFields(
+                    { name: 'Canal', value: link ? link.channelTitle : 'None' },
+                    { name: 'Descrição', value: link ? link.description : 'None'}
+                )
+                .setFooter(`Selecionado por ${message.author.username}`,message.author.avatarURL());
+            return message.channel.send(queue_message);
         }
 
         dispatcher.on('start', () => {
-            console.log('audio.mp3 is now playing!');
-
             const playing_message = new Discord.MessageEmbed()
                 .setTitle(link.title)
                 .setColor("#ff0015")
@@ -63,101 +127,9 @@ exports.run = async (bot,message,args) => {
         dispatcher.on('error', console.error);
     }
 
-    if(!args[0]) return message.channel.send("Digite o link da música. Ex: r!play https://www.youtube.com/watch?v=KJrdDg");
-    if(!message.member.voice.channel) return message.channel.send("Você deve estar em um canal de voz!");
-
-    const voice_channel = message.member.voice.channel;
-
-    if (bot.playing[`${guild}`]) {
-        if (!args[0].startsWith('http')){
-            let results;
-            try{
-                results = (await yt_search(args.join(separator=' '),opts)).results;
-            } catch (err) {
-                const error_message = new Discord.MessageEmbed()
-                    .setTitle("Error")
-                    .setColor("#ff0015")
-                    .setAuthor('Rapid Bot', 'https://cdn.discordapp.com/app-icons/734154625845952694/8261474e8963b9e62bf19159ca52dcea.png', 'https://discord.com/oauth2/authorize?client_id=734154625845952694&permissions=8&scope=bot')
-                    .setURL(music.link)
-                    .setDescription(`Erro ao buscar a música!\nPor favor tente colocar o link da música`)
-                    .setFooter(`Selecionado por ${message.author.username}`,message.author.avatarURL());
-                return message.channel.send(error_message);
-            }
-            if (!results[0]) return message.channel.send("Nenhum resultado encontrado!");
-
-            let music = results[0];
-
-            if (music.link.includes('playlist')){
-                music = results[1];
-            }
-
-            const queue_message = new Discord.MessageEmbed()
-                .setTitle(music.title)
-                .setColor("#ff0015")
-                .setAuthor('Rapid Bot', 'https://cdn.discordapp.com/app-icons/734154625845952694/8261474e8963b9e62bf19159ca52dcea.png', 'https://discord.com/oauth2/authorize?client_id=734154625845952694&permissions=8&scope=bot')
-                .setURL(music.link)
-                .setDescription(`Adicionado a fila de reprodução!`)
-                .setThumbnail(music.thumbnails.high.url)
-                .addFields(
-                    { name: 'Canal', value: music ? music.channelTitle : 'None' },
-                    { name: 'Descrição', value: music ? music.description : 'None'}
-                )
-                .setFooter(`Selecionado por ${message.author.username}`,message.author.avatarURL());
-
-            bot.queue[`${guild}`].push(music);
-            return message.channel.send(queue_message);
-
-        } else {
-            let results;
-            try{
-                results = (await yt_search(args[0],opts)).results;
-            } catch (err) {
-                const error_message = new Discord.MessageEmbed()
-                    .setTitle("Error")
-                    .setColor("#ff0015")
-                    .setAuthor('Rapid Bot', 'https://cdn.discordapp.com/app-icons/734154625845952694/8261474e8963b9e62bf19159ca52dcea.png', 'https://discord.com/oauth2/authorize?client_id=734154625845952694&permissions=8&scope=bot')
-                    .setDescription(`Erro ao buscar a música!\nPor favor tente colocar o link da música`)
-                    .setFooter(`Selecionado por ${message.author.username}`,message.author.avatarURL());
-                return message.channel.send(error_message);
-            }
-            if (!results[0]) return message.channel.send("Nenhum resultado encontrado!");
-
-            const queue_message = new Discord.MessageEmbed()
-                .setTitle(results[0].title)
-                .setColor("#ff0015")
-                .setAuthor('Rapid Bot', 'https://cdn.discordapp.com/app-icons/734154625845952694/8261474e8963b9e62bf19159ca52dcea.png', 'https://discord.com/oauth2/authorize?client_id=734154625845952694&permissions=8&scope=bot')
-                .setURL(results[0].link)
-                .setDescription(`Adicionado a fila de reprodução!`)
-                .setThumbnail(results[0].thumbnails.high.url)
-                .addFields(
-                    { name: 'Canal', value: results[0] ? results[0].channelTitle : 'None' },
-                    { name: 'Descrição', value: results[0] ? results[0].description : 'None' },
-                )
-                .setFooter(`Selecionado por ${message.author.username}`,message.author.avatarURL());
-
-            bot.queue[`${guild}`].push(results[0]);
-            return message.channel.send(queue_message);
-        }
-    }
-
-    const connection = await voice_channel.join();
-    bot.queue[`${guild}`] = [];
-
-    const {results} = await yt_search(args.join(separator=' '),opts);
-    if (!results[0]) return message.channel.send("Nenhum resultado encontrado!");
-
-    try{
-        play(connection,results[0]);
-    } catch (err) {
-        const error_message = new Discord.MessageEmbed()
-        .setTitle("Error")
-        .setColor("#ff0015")
-        .setAuthor('Rapid Bot', 'https://cdn.discordapp.com/app-icons/734154625845952694/8261474e8963b9e62bf19159ca52dcea.png', 'https://discord.com/oauth2/authorize?client_id=734154625845952694&permissions=8&scope=bot')
-        .setURL(results[0].link)
-        .setThumbnail(results[0].thumbnails.high.url)
-        .setDescription(`Erro ao tocar a música!`)
-        .setFooter(`Selecionado por ${message.author.username}`,message.author.avatarURL());
-        
-        return message.channel.send(error_message);
+    if (args.link){
+        return play(connection,args);
+    } else {
+        return get_results(args);
     }
 };
