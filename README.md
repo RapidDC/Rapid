@@ -42,14 +42,14 @@
         - Muta um usuário
     - r!unmute @Test#3333
         - Desmuta um usuário
-    - r!welcomemsg (Titulo) ; (Descricao) ; (Gif / Imagem link) ; (Nome do canal)
-        - Define a mensagem de boas-vindas (TODOS OS ARGUMENTOS DEVEM SER SEPARADOS POR ;)
     - r!antiflood
         - Ativa ou desativa o sistema anti-flood
     - r!stopchat (Chat)
         - Para o chat desabilitando a permissão dos usuários de falar
     - r!resumechat (Chat)
         - Habilita novamente a permissão dos usuários de falar
+    - r!sendembed (Título) ; (Descrição) ; (Thumbnail)
+        - Envia uma mensagem em formato embed
         
 - Comandos para ouvir músicas
     - r!play União Flasco
@@ -64,6 +64,8 @@
         - Define o volume da música
     - r!skip
         - Pula para a próxima música da fila
+    - r!loop
+        - Coloca a música em loop
 
 - Comandos Gerais
     - r!help
@@ -76,6 +78,8 @@
         - Exibe uma mensagem de convite para o servidor
     - r!rules
         - Exibe uma mensagem de regras
+    - r!botinfo
+        - Exibe informações sobre o bot
 
 - Comandos para criar memes
     - r!bobesponja (Texto)
