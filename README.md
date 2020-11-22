@@ -11,6 +11,11 @@
 <p align="center">
     <a href="https://discord.com/oauth2/authorize?client_id=734154625845952694&permissions=8&scope=bot">Me adicione ao seu servidor!</a>
 </p>
+<p align="center">
+    <a href="https://top.gg/bot/734154625845952694">
+    <img src="https://top.gg/api/widget/734154625845952694.svg" alt="Rapid" />
+</a>
+</p>
 
 ## :computer: Bibliotecas usadas
 - Principal
