@@ -13,6 +13,7 @@ exports.run = (bot,message,args) => {
     }
 
     const user = message.guild.member(message.mentions.users.first());
+    if (!user) return message.channel.send("Usuário inválido!");
 
     message.mentions.members.map((member) => { 
         manage_roles.removeRole(member,role_name);

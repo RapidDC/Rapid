@@ -14,6 +14,7 @@ exports.run = (bot,message,args) => {
     }
     
     const user = message.guild.member(message.mentions.users.first());
+    if (!user) return message.channel.send("Usuário inválido!");
     const mute_time = args[1] ? ms(args[1]) : ms('15m');
     
     message.mentions.members.map((member) => { 

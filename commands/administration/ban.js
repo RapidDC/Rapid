@@ -9,7 +9,8 @@ exports.run = (bot,message,args) => {
 		return;
 	}
 	
-    const user = message.mentions.users.first();
+	const user = message.mentions.users.first();
+	if (!user) return message.channel.send("Usuário inválido!");
     const username = user.username;
 
     args.shift();
