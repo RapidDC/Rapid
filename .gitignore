@@ -9,3 +9,4 @@ test.js
 DiscordBot.zip
 commands/administration/setalert.js
 commands/administration/sendalert.js
+commands/lol/
